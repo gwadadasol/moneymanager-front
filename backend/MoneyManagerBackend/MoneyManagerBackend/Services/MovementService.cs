@@ -15,7 +15,7 @@ namespace MoneyManagerBackend.Services
             {
                 new Movement
                 {
-                    Id = Guid.NewGuid(),
+                    Id = 1,
                     Date = new DateTime(2021, 03, 31),
                     Account = "1",
                     Description = "desc 1",
@@ -23,7 +23,7 @@ namespace MoneyManagerBackend.Services
                 },
                 new Movement
                 {
-                    Id = Guid.NewGuid(),
+                    Id = 2,
                     Date = new DateTime(2021, 03, 31),
                     Account = "2",
                     Description = "desc 2",
@@ -33,7 +33,7 @@ namespace MoneyManagerBackend.Services
 
         }
 
-        public bool DelteMovement(Guid movementId)
+        public bool DelteMovement(int movementId)
         {
             var movement = GetMovementById(movementId);
 
@@ -46,7 +46,7 @@ namespace MoneyManagerBackend.Services
             return true;
         }
 
-        public Movement GetMovementById(Guid movementId)
+        public Movement GetMovementById(int movementId)
         {
             return _movements.FirstOrDefault(m => m.Id == movementId);
         }

@@ -8,10 +8,10 @@ namespace MoneyManagerBackend.Services
     {
         public List<Movement> GetMovements();
 
-        public Movement GetMovementById(Guid movementId);
+        public Movement GetMovementById(int movementId);
 
         public bool UpdateMovement(Movement movement);
-        public bool DelteMovement(Guid movementId);
+        public bool DelteMovement(int movementId);
 
     }
 }

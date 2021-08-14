@@ -21,6 +21,13 @@ namespace MoneyManagerBackend
         public void ConfigureServices(IServiceCollection services)
         {
             services.InstallServicesAssembly(Configuration);
+            services.AddCors(options => options.AddDefaultPolicy(
+                //name: "MyPolicy",
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000");
+                }));
+
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 
@@ -45,6 +52,8 @@ namespace MoneyManagerBackend
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 

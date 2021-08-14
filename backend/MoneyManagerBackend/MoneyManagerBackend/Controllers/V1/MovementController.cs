@@ -11,20 +11,38 @@ namespace MoneyManagerBackend.Controllers.V1
     public class MovementController : ControllerBase
     {
         public readonly List<Movement> _movements;
+        
 
         public MovementController()
         {
             _movements = new List<Movement>();
-
-            var v = new Movement
+            using (var dbContext = new SqliteDbContext())
             {
-                Date = new DateTime(2021, 03, 31),
-                Account = "1",
-                Description = "desc 1",
-                Amount = 10
-            };
+                foreach (var movement in dbContext.Movements)
+                {
+                    _movements.Add(new Movement
+                    {
+                        Id = movement.Id,
+                        Account = movement.AccountNumber,
+                        Description = movement.Description,
+                        Amount = movement.AmountCad,
+                        Date = movement.TransactionDate
+                    });
+                }
 
-            _movements.Add(v);
+            }
+
+                
+
+            //var v = new Movement
+            //{
+            //    Date = new DateTime(2021, 03, 31),
+            //    Account = "1",
+            //    Description = "desc 1",
+            //    Amount = 10
+            //};
+
+            //_movements.Add(v);
         }
          
         [HttpGet(ApiRoutes.Movement.GetAll)]
