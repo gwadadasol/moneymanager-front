@@ -8,7 +8,7 @@ namespace MoneyManagerBackend.Domains
 {
     public class SqliteDbContext : DbContext
     {
-        public DbSet<MovementEntity> Movements { get; set; }
+        public DbSet<TransactionEntity> Movements { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -17,7 +17,7 @@ namespace MoneyManagerBackend.Domains
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<MovementEntity>().ToTable("Transactions");
+            modelBuilder.Entity<TransactionEntity>().ToTable("Transactions");
         }
     }
 }

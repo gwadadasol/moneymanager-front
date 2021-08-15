@@ -5,15 +5,15 @@ using MoneyManagerBackend.Domains;
 
 namespace MoneyManagerBackend.Services
 {
-    public class MovementService : IMovementService
+    public class TransactionService : ITransactionService
     {
-        private readonly List<Movement> _movements;
+        private readonly List<Transaction> _movements;
 
-        public MovementService()
+        public TransactionService()
         {
             _movements = new()
             {
-                new Movement
+                new Transaction
                 {
                     Id = 1,
                     Date = new DateTime(2021, 03, 31),
@@ -21,7 +21,7 @@ namespace MoneyManagerBackend.Services
                     Description = "desc 1",
                     Amount = 10
                 },
-                new Movement
+                new Transaction
                 {
                     Id = 2,
                     Date = new DateTime(2021, 03, 31),
@@ -33,9 +33,9 @@ namespace MoneyManagerBackend.Services
 
         }
 
-        public bool DelteMovement(int movementId)
+        public bool DeleteTransaction(int movementId)
         {
-            var movement = GetMovementById(movementId);
+            var movement = GetTransactionById(movementId);
 
             if (movement == null)
             {
@@ -46,19 +46,19 @@ namespace MoneyManagerBackend.Services
             return true;
         }
 
-        public Movement GetMovementById(int movementId)
+        public Transaction GetTransactionById(int movementId)
         {
             return _movements.FirstOrDefault(m => m.Id == movementId);
         }
 
-        public List<Movement> GetMovements()
+        public List<Transaction> GetTransactions()
         {
             return _movements;
         }
 
-        public bool UpdateMovement(Movement movementToUpdate)
+        public bool UpdateTransaction(Transaction movementToUpdate)
         {
-            bool exist = GetMovementById(movementToUpdate.Id) != null;
+            bool exist = GetTransactionById(movementToUpdate.Id) != null;
 
             if (!exist)
                 return false;

@@ -8,19 +8,19 @@ namespace MoneyManagerBackend.Controllers.V1
 {
     [ApiController]
     [Route("check")]
-    public class MovementController : ControllerBase
+    public class TransactionController : ControllerBase
     {
-        public readonly List<Movement> _movements;
+        public readonly List<Transaction> _movements;
         
 
-        public MovementController()
+        public TransactionController()
         {
-            _movements = new List<Movement>();
+            _movements = new List<Transaction>();
             using (var dbContext = new SqliteDbContext())
             {
                 foreach (var movement in dbContext.Movements)
                 {
-                    _movements.Add(new Movement
+                    _movements.Add(new Transaction
                     {
                         Id = movement.Id,
                         Account = movement.AccountNumber,

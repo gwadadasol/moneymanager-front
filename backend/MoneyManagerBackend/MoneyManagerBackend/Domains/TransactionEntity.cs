@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MoneyManagerBackend.Domains
 {
-    public class MovementEntity
+    public class TransactionEntity
     {
         public int Id { get; set; }
         public DateTime TransactionDate { get; set; }
