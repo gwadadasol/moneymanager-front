@@ -45,13 +45,13 @@ namespace MoneyManagerBackend.Controllers.V1
             //_movements.Add(v);
         }
          
-        [HttpGet(ApiRoutes.Movement.GetAll)]
+        [HttpGet(ApiRoutes.Transaction.GetAll)]
         public IActionResult GetMovement()
         {
             return Ok(_movements);
         }
 
-        [HttpPost(ApiRoutes.Movement.Create)]
+        [HttpPost(ApiRoutes.Transaction.Create)]
         public IActionResult Create()
         {
             return Ok(1);

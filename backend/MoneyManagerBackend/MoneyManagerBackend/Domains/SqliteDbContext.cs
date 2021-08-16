@@ -9,6 +9,7 @@ namespace MoneyManagerBackend.Domains
     public class SqliteDbContext : DbContext
     {
         public DbSet<TransactionEntity> Movements { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -18,6 +19,7 @@ namespace MoneyManagerBackend.Domains
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TransactionEntity>().ToTable("Transactions");
+            modelBuilder.Entity<Category>().ToTable("Categories");
         }
     }
 }
