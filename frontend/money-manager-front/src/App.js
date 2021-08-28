@@ -72,7 +72,7 @@ const App = () => {
         body:JSON.stringify(updTask)
       })
 
-      const data = await res.json()
+    const data = await res.json()
 
     setTasks(
       tasks.map(
@@ -101,13 +101,27 @@ const App = () => {
   }
 
 
-  const addCategory =  (category) => {
-    const id = Math.floor(Math.random() * 10000) + 1
-    const newCategory = { id, ...category }
-    setCategories([...categories, newCategory])
-    console.log('Add category',category)
-    console.log('Add category',newCategory)
-    console.log('Add category',categories)
+  const fetchCategories = async () => {
+    const res = await fetch('https://localhost:5001/api/v1/categories')
+    const data = await res.json()
+
+    return data
+  }
+
+
+  const addCategory =  async (category) => {
+    // const id = Math.floor(Math.random() * 10000) + 1
+    // const newCategory = { id, ...category }
+    // setCategories([...categories, newCategory])
+    // console.log('Add category',category)
+    // console.log('Add category',newCategory)
+    // console.log('Add category',categories)
+
+    const newCategories = await fetchCategories();
+    console.log(newCategories);
+
+    setCategories(newCategories);
+    categories.map((cat) => console.log(cat));
   }
 
   return (
