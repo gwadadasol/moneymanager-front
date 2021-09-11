@@ -26,7 +26,7 @@ namespace MoneyManagerBackend
                 //name: "MyPolicy",
                 builder =>
                 {
-                    builder.WithOrigins("http://localhost:3000");
+                    builder.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
                 }));
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
