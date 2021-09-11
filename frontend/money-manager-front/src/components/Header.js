@@ -8,8 +8,8 @@ const Header = ({title, onAdd, showAdd}) => {
 
     return (
         <>
-            <Button>Data</Button>
-            <Button>Admin</Button>
+            <Button onClick={() => { onAdd(false) }} >Data</Button>
+            <Button onClick={() => { onAdd(true) }} >Admin</Button>
         </>
     )
 }

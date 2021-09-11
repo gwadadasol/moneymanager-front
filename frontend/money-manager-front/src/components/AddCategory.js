@@ -11,7 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
-const AddCategory = ({ categories, onAdd }) => {
+const AddCategory = ({ categories, onAdd, onDelete }) => {
 
     const [name, setText] = useState('')
 
@@ -29,33 +29,21 @@ const AddCategory = ({ categories, onAdd }) => {
 
     return (
         <div>
-            <Grid container spacing={3}>
-            <Grid item xs={6}>
             <form className='add-category' onSubmit={onSubmit}>
-                <TextField id='category-name' variant='outlined' label='Category Name' value={name} onChange={(event) => setText(event.target.value)} />
-                <Button type="submit" variant="contained" >Add</Button>
-            </form>
-            </Grid>
-            <Grid item xs={6}>
-                <TableContainer component={Paper}>
-                    <Table size="small" aria-label="simple table">
-                        <TableHead style={{ backgroundColor: '#546E7A' }} >
-                            <TableRow>
-                                <TableCell style={{ color: 'white', }}>Category</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
+                <input id='category-name' variant='outlined' label='Category Name' value={name} onChange={(event) => setText(event.target.value)} />
+                <input type="submit" variant="contained" value='Add'/>
+           
+                    <table>
+                        <tbody>
                             {categories.map((category) => (
-                                <TableRow key={category.id}>
-                                    <TableCell component="th" scope="row">{category.name}</TableCell>
-                                </TableRow>
+                                <tr key={category.id }>
+                                    <td >{category.name}</td>
+                                    <td><input id={category.id } type='button' value='delete' onClick={(event) => onDelete(event.target.id)}/></td>
+                                </tr>
                             ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Grid>
-            </Grid>
-            
+                    </tbody>
+                    </table>
+                    </form> 
         </div>
 
     )
