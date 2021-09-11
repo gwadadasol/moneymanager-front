@@ -34,7 +34,7 @@ namespace MoneyManagerBackend.Controllers.V1
         }
 
         [HttpPost(ApiRoutes.Category.Create)]
-        public async Task<IActionResult> Create(string name)
+        public async Task<IActionResult> Create([FromBody] string name)
         {
             var result = await _mediator.Send(new CreateCategoryRequest() { Name = name});
             if (result != null)
@@ -45,6 +45,15 @@ namespace MoneyManagerBackend.Controllers.V1
             }
             else
                 return NotFound();
+        }
+
+        [HttpDelete(ApiRoutes.Category.Delete)]
+        public async Task<IActionResult> Delete(int categoryId)
+        {
+            var result = await _mediator.Send(new DeleteCategoryRequest() { CategoryId = categoryId});
+
+            return result ? Ok() : NotFound();
+
         }
     }
 }
