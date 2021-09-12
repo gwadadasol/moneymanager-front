@@ -13,6 +13,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import TextField from '@material-ui/core/TextField';
 import DoneIcon from '@material-ui/icons/Done';
 import { Rowing } from "@material-ui/icons";
+import CategoriesCombobox from "./CategoriesCombobox";
 
 const useStyles = makeStyles({
     table: {
@@ -22,10 +23,12 @@ const useStyles = makeStyles({
 
 const Movements = ({
   movements, 
+  categories,
   onLoadMovements, 
   startEditingCategory,
   stopEditingCategory,
-  editIdx
+  editIdx,
+  onChangeMovementCategory
 }) => {
     const classes = useStyles();
     return (
@@ -52,8 +55,8 @@ const Movements = ({
               <TableCell>{(new Date(row.date)).toLocaleDateString()}</TableCell>
               <TableCell>{row.amount}</TableCell>
               <TableCell>{row.description}</TableCell>
-              <TableCell> {row.id ===  editIdx? (<TextField name={row.id} value={row.category} />):(row.category)}</TableCell> 
-              <TableCell> {row.id ===  editIdx? (<DoneIcon  onClick={() => stopEditingCategory()}/> ) : (<EditIcon onClick={() => startEditingCategory(row.id)}/>)} </TableCell>
+              <TableCell> {row.id ===  editIdx? (<CategoriesCombobox categories={categories} selectedValue={row.category} onChangeMovementCategory={onChangeMovementCategory}/>):(row.category)}</TableCell> 
+              <TableCell> {row.id ===  editIdx? (<DoneIcon  onClick={() => stopEditingCategory()}/> ) : (<EditIcon onClick={() => startEditingCategory(row.id, row.category)}/>)} </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -66,3 +69,5 @@ const Movements = ({
 }
 
 export default Movements
+
+// <TextField name={row.id} value={row.category} />

@@ -4,17 +4,19 @@ import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
 import Movements from "./components/Movements";
 import AddCategory from "./components/AddCategory";
+import CategoriesCombobox from "./components/CategoriesCombobox";
 
 const App = () => {
   
   
   
-  const [showFormAddTask, setShowFormAddTask] = useState(false)
-  const [movements, setMovements] = useState([])
+  const [showFormAddTask, setShowFormAddTask] = useState(false);
+  const [movements, setMovements] = useState([]);
 
-  const [showAdmin,setShowAdmin] = useState(false)
-  const [categories, setCategories] = useState([])
-  const [editingCategoryIndex, setEditingCategoryIndex] = useState(-1)
+  const [showAdmin,setShowAdmin] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [editingCategoryIndex, setEditingCategoryIndex] = useState(-1);
+  const [editingCategoryValue, setEditingCategoryValue] = useState('');
 
 
 
@@ -33,13 +35,19 @@ const App = () => {
     const res = await fetch('https://localhost:5001/check/api/v1/transactions')
     const data = await res.json()
 
-    console.log(data)
+    // console.log(data)
     return data
   }
 
   const displayMovements = async () => {
     const movementsFromServer = await fetchMovements()
-    setMovements(movementsFromServer)
+
+    var movementsWithCategory = [];
+
+    movementsFromServer.map( (mvt) =>  { movementsWithCategory.push(mvt.hasOwnProperty('category')?mvt:{...mvt, 'category':'None'})} );
+    // console.log(movementsWithCategory);
+
+    setMovements(movementsWithCategory);
   }
 
   const fetchCategories = async () => {
@@ -91,12 +99,18 @@ const App = () => {
     // categories.map((cat) => console.log(cat));
   }
 
-  const startEditingCategory = (rowId) => {
+  const startEditingCategory = (rowId, categoryValue) => {
     setEditingCategoryIndex(rowId);
+    setEditingCategoryValue(categoryValue);
   }
 
   const stopEditingCategory = () => {
     setEditingCategoryIndex(-1);
+  }
+
+  const onChangeMovementCategory = (value) =>
+  {
+    setEditingCategoryValue(value);
   }
 
   
@@ -105,14 +119,18 @@ const App = () => {
     // <div className="container">
     <div>
       <Header title="Money Manager" onAdd={(showAdmin) => {setShowFormAddTask(showAdmin); console.log(showAdmin); }} showAdd={showFormAddTask} />
+      {<CategoriesCombobox categories={categories} selectedValue='' onChangeMovementCategory={onChangeMovementCategory}/>}
       { !showFormAddTask && <Movements 
-      movements={movements} 
+      movements={movements}
+      categories={categories} 
       onLoadMovements={displayMovements}
       startEditingCategory={startEditingCategory}
       stopEditingCategory={stopEditingCategory}
       editIdx={editingCategoryIndex}
+      onChangeMovementCategory={onChangeMovementCategory}
       /> }
-      {showFormAddTask && <AddCategory categories={categories} onAdd={addCategory} onDelete={deleteCategory}/>}
+      {showFormAddTask && <AddCategory categories={categories} onAdd={addCategory} onDelete={deleteCategory}  />}
+
     </div>
   )
 }
