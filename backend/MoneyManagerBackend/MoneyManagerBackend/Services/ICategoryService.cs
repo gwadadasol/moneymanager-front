@@ -8,6 +8,6 @@ namespace MoneyManagerBackend.Services
 {
     public interface ICategoryService
     {
-        public List<Category> GetCategories();
+        public List<CategoryDto> GetCategories();
     }
 }

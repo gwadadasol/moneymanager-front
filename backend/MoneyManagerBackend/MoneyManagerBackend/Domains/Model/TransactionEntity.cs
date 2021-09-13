@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MoneyManagerBackend.Domains
+namespace MoneyManagerBackend.Domains.Model
 {
     public class TransactionEntity
     {

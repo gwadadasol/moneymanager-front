@@ -9,7 +9,7 @@ namespace MoneyManagerBackend.Services
     public class CategoryService : ICategoryService
     {
 
-        public List<Category> GetCategories()
+        public List<CategoryDto> GetCategories()
         {
             return null;
         }

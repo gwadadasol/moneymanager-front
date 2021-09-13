@@ -6,11 +6,11 @@ namespace MoneyManagerBackend.Services
 {
     public interface ITransactionService
     {
-        public List<Transaction> GetTransactions();
+        public List<TransactionDto> GetTransactions();
 
-        public Transaction GetTransactionById(int movementId);
+        public TransactionDto GetTransactionById(int movementId);
 
-        public bool UpdateTransaction(Transaction movement);
+        public bool UpdateTransaction(TransactionDto movement);
         public bool DeleteTransaction(int movementId);
 
     }

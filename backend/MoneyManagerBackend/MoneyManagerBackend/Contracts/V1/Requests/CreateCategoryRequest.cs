@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MoneyManagerBackend.Contracts.V1.Requests
 {
-    public class CreateCategoryRequest : IRequest<Category> 
+    public class CreateCategoryRequest : IRequest<CategoryDto> 
     {
         public string Name { get; set; }
     }

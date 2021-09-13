@@ -7,13 +7,13 @@ namespace MoneyManagerBackend.Services
 {
     public class TransactionService : ITransactionService
     {
-        private readonly List<Transaction> _movements;
+        private readonly List<TransactionDto> _movements;
 
         public TransactionService()
         {
             _movements = new()
             {
-                new Transaction
+                new TransactionDto
                 {
                     Id = 1,
                     Date = new DateTime(2021, 03, 31),
@@ -21,7 +21,7 @@ namespace MoneyManagerBackend.Services
                     Description = "desc 1",
                     Amount = 10
                 },
-                new Transaction
+                new TransactionDto
                 {
                     Id = 2,
                     Date = new DateTime(2021, 03, 31),
@@ -46,17 +46,17 @@ namespace MoneyManagerBackend.Services
             return true;
         }
 
-        public Transaction GetTransactionById(int movementId)
+        public TransactionDto GetTransactionById(int movementId)
         {
             return _movements.FirstOrDefault(m => m.Id == movementId);
         }
 
-        public List<Transaction> GetTransactions()
+        public List<TransactionDto> GetTransactions()
         {
             return _movements;
         }
 
-        public bool UpdateTransaction(Transaction movementToUpdate)
+        public bool UpdateTransaction(TransactionDto movementToUpdate)
         {
             bool exist = GetTransactionById(movementToUpdate.Id) != null;
 

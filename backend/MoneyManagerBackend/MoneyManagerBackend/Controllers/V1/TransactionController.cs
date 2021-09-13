@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MoneyManagerBackend.Domains;
 using Microsoft.AspNetCore.Mvc;
 using MoneyManagerBackend.Contracts.V1;
+using MoneyManagerBackend.Domains.Model;
 
 namespace MoneyManagerBackend.Controllers.V1
 {
@@ -10,23 +11,24 @@ namespace MoneyManagerBackend.Controllers.V1
     [Route("check")]
     public class TransactionController : ControllerBase
     {
-        public readonly List<Transaction> _movements;
+        public readonly List<TransactionDto> _movements;
         
 
         public TransactionController()
         {
-            _movements = new List<Transaction>();
+            _movements = new List<TransactionDto>();
             using (var dbContext = new SqliteDbContext())
             {
                 foreach (var movement in dbContext.Movements)
                 {
-                    _movements.Add(new Transaction
+                    _movements.Add(new TransactionDto
                     {
                         Id = movement.Id,
                         Account = movement.AccountNumber,
                         Description = movement.Description,
                         Amount = movement.AmountCad,
-                        Date = movement.TransactionDate
+                        Date = movement.TransactionDate,
+                        Category = new CategoryDto{Id = -1, Name = ""}
                     });
                 }
 
@@ -56,5 +58,15 @@ namespace MoneyManagerBackend.Controllers.V1
         {
             return Ok(1);
         }
+
+        [HttpPut(ApiRoutes.Transaction.Update)]
+        public IActionResult Update(int transactionId, [FromBody] TransactionDto transaction )
+        {
+            Console.WriteLine(transaction.ToString());
+            return Ok(1);
+        }
+
+
+
     }
 }

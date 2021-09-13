@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using MoneyManagerBackend.Contracts.V1.Requests;
-using MoneyManagerBackend.Domains;
-using System;
-using System.Collections.Generic;
+using MoneyManagerBackend.Domains.Model;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,7 +14,6 @@ namespace MoneyManagerBackend.Contracts.V1.Handlers
             string newCategoryId = string.Empty;
             using (var dbContext = new SqliteDbContext())
             {
-
                 if ( dbContext.Categories.Any(c => c.Id == request.CategoryId))
                 {
                     var cat = dbContext.Categories.First(c => c.Id == request.CategoryId);
@@ -26,7 +23,6 @@ namespace MoneyManagerBackend.Contracts.V1.Handlers
                 }
 
                 return false;
-
             }
         }
     }

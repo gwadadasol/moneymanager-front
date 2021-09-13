@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MoneyManagerBackend.Domains
+namespace MoneyManagerBackend.Domains.Model
 {
     public class SqliteDbContext : DbContext
     {
         public DbSet<TransactionEntity> Movements { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<CategoryEntity> Categories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -19,7 +19,7 @@ namespace MoneyManagerBackend.Domains
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TransactionEntity>().ToTable("Transactions");
-            modelBuilder.Entity<Category>().ToTable("Categories");
+            modelBuilder.Entity<CategoryEntity>().ToTable("Categories");
         }
     }
 }
