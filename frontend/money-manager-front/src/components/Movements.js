@@ -56,7 +56,7 @@ const Movements = ({
               <TableCell>{row.amount}</TableCell>
               <TableCell>{row.description}</TableCell>
               <TableCell> {row.id ===  editIdx? (<CategoriesCombobox categories={categories} selectedValue={row.category} onChangeMovementCategory={onChangeMovementCategory}/>):(row.category)}</TableCell> 
-              <TableCell> {row.id ===  editIdx? (<DoneIcon  onClick={() => stopEditingCategory()}/> ) : (<EditIcon onClick={() => startEditingCategory(row.id, row.category)}/>)} </TableCell>
+              <TableCell> {row.id ===  editIdx? (<DoneIcon  onClick={() => stopEditingCategory(row.id)}/> ) : (<EditIcon onClick={() => startEditingCategory(row.id, row.category)}/>)} </TableCell>
             </TableRow>
           ))}
         </TableBody>

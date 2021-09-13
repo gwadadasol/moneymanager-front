@@ -36,7 +36,7 @@ const CategoriesCombobox = ({categories, selectedValue, onChangeMovementCategory
         value={selectedValue}
         onChange={handleChange}
         >
-          {categories.map((category) => ( <option value={category.name}>{category.name}</option>))}
+          {categories.map((category) => ( <option value={category.id}>{category.name}</option>))}
           <option value="None">None</option>
 
 

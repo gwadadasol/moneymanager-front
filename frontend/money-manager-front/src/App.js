@@ -104,13 +104,42 @@ const App = () => {
     setEditingCategoryValue(categoryValue);
   }
 
-  const stopEditingCategory = () => {
+  const updateMovement = async (rowId) => {
+    var movement = movements.find(row => row.id == editingCategoryIndex);
+
+    const res = await fetch (`https://localhost:5001/check/api/v1/transactions/${movement.id}`, 
+    {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json' },
+        body:JSON.stringify(movement)
+      })
+
+
+      const data = await res.json()
+      return data;
+
+  }
+
+  const stopEditingCategory = async (rowId) => {
+
+    await updateMovement(rowId);
+   
     setEditingCategoryIndex(-1);
   }
 
-  const onChangeMovementCategory = (value) =>
+  const onChangeMovementCategory = (categoryIndex) =>
   {
-    setEditingCategoryValue(value);
+    setEditingCategoryValue(categoryIndex);
+    var movement = movements.find(row => row.id == editingCategoryIndex);
+    var category = categories.find(c => c.id == categoryIndex);
+
+    console.log ('editingCategoryIndex -> ' + editingCategoryIndex);
+    console.log (movement);
+    console.log (category);
+    console.log (categories);
+
+    movement.category = category.name;
   }
 
   
