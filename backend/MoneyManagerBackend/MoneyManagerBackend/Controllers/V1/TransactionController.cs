@@ -4,6 +4,7 @@ using MoneyManagerBackend.Domains;
 using Microsoft.AspNetCore.Mvc;
 using MoneyManagerBackend.Contracts.V1;
 using MoneyManagerBackend.Domains.Model;
+using MoneyManagerBackend.Domains.Dtos;
 
 namespace MoneyManagerBackend.Controllers.V1
 {

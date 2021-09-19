@@ -1,3 +1,4 @@
+using System;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +33,8 @@ namespace MoneyManagerBackend
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
             services.AddMediatR(typeof(Startup));
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,15 +45,12 @@ namespace MoneyManagerBackend
                 app.UseDeveloperExceptionPage();
             }
 
-
             SwaggerOptions swaggerOptions = new();
             Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
 
             app.UseSwagger(option => { option.RouteTemplate = swaggerOptions.JsonRoute; });
 
-
             app.UseSwaggerUI(c => c.SwaggerEndpoint(swaggerOptions.UIEndpoint, swaggerOptions.Description));
-
 
             app.UseHttpsRedirection();
 

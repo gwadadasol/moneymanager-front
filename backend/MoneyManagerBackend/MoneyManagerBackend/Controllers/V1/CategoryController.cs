@@ -26,22 +26,24 @@ namespace MoneyManagerBackend.Controllers.V1
             var result = await _mediator.Send(new GetCategoriesRequest());
             return Ok(result);
         }
-        [HttpGet(ApiRoutes.Category.Get)]
-        public async Task<IActionResult> GetCategories(int categoryId)
+        [HttpGet(ApiRoutes.Category.Get, Name = "GetCategoryById")]
+        public async Task<IActionResult> GetCategoryById(int categoryId)
         {
             var result = await _mediator.Send(new GetCategoryRequest() { Id = categoryId });
             return result != null ? Ok(result) : NotFound();
         }
 
         [HttpPost(ApiRoutes.Category.Create)]
-        public async Task<IActionResult> Create([FromBody] string name)
+        public async Task<IActionResult> Create( string categoryName)
         {
-            var result = await _mediator.Send(new CreateCategoryRequest() { Name = name});
+            var result = await _mediator.Send(new CreateCategoryRequest() { Name = categoryName});
             if (result != null)
             {
-                var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
-                var locationUri = $"{baseUrl}/{ApiRoutes.Category.Get.Replace("{categoryId}", result.Id.ToString())}";
-                return Created(locationUri, result);
+                // var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
+                // var locationUri = $"{baseUrl}/{ApiRoutes.Category.Get.Replace("{categoryId}", result.Id.ToString())}";
+                // return Created(locationUri, result);
+
+                return CreatedAtRoute(nameof(GetCategoryById),new { categoryId = result.Id}, result );
             }
             else
                 return NotFound();

@@ -1,6 +1,7 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using MoneyManagerBackend.Contracts.V1.Requests;
-using MoneyManagerBackend.Domains;
+using MoneyManagerBackend.Domains.Dtos;
 using MoneyManagerBackend.Domains.Model;
 using System.Linq;
 using System.Threading;
@@ -10,6 +11,13 @@ namespace MoneyManagerBackend.Contracts.V1.Handlers
 {
     public class CreateCategoryRequestHandler : IRequestHandler<CreateCategoryRequest, CategoryDto>
     {
+        private IMapper _mapper;
+
+        public CreateCategoryRequestHandler(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
+
         public async Task<CategoryDto> Handle(CreateCategoryRequest request, CancellationToken cancellationToken)
         {
             string newCategoryId = string.Empty;
@@ -19,17 +27,10 @@ namespace MoneyManagerBackend.Contracts.V1.Handlers
                 await dbContext.SaveChangesAsync();
 
                 CategoryEntity catEnt =  dbContext.Categories.FirstOrDefault(value => value.Name == request.Name);
-                CategoryDto categoryDto = new CategoryDto {
-                    Id = catEnt.Id, 
-                    Name = catEnt.Name
-                    };
+                CategoryDto categoryDto = _mapper.Map<CategoryDto>(catEnt);
 
-
-                // return dbContext.Categories.FirstOrDefault(value => value.Name == request.Name);
                 return categoryDto;
             }
-
-            
         }
     }
 }

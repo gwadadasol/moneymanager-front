@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using MoneyManagerBackend.Domains;
+using MoneyManagerBackend.Domains.Dtos;
 
 namespace MoneyManagerBackend.Services
 {

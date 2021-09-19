@@ -1,9 +1,5 @@
 ﻿using MediatR;
-using MoneyManagerBackend.Domains;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MoneyManagerBackend.Domains.Dtos;
 
 namespace MoneyManagerBackend.Contracts.V1.Requests
 {
