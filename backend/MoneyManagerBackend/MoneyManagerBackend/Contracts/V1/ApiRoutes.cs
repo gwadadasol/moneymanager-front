@@ -20,7 +20,7 @@ namespace MoneyManagerBackend.Contracts.V1
             //public const string Update = Base + "/categories/{categoryId}";
             public const string Delete = Base + "/categories/{categoryId}";
             public const string Get = Base + "/categories/{categoryId}";
-            public const string Create = Base + "/categories";
+            public const string Create = Base + "/categories/{categoryName}";
         }
     }
 }
