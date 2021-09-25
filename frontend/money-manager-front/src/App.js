@@ -32,7 +32,7 @@ const App = () => {
   }, [])
 
   const fetchMovements = async () => {
-    const res = await fetch('https://localhost:5001/check/api/v1/transactions')
+    const res = await fetch('http://acme.com/check/api/v1/transactions')
     const data = await res.json()
 
     // console.log(data)
@@ -51,7 +51,7 @@ const App = () => {
   }
 
   const fetchCategories = async () => {
-    const res = await fetch('https://localhost:5001/api/v1/categories')
+    const res = await fetch('http://acme.com/api/v1/categories')
     const data = await res.json()
 
     return data
@@ -67,14 +67,14 @@ const App = () => {
 
   const addCategory =  async (category) => {
     console.log(category);
-    const res = await fetch ('https://localhost:5001/api/v1/categories', 
+    const res = await fetch (`http://acme.com/api/v1/categories/${category.name}`, 
     {
       method: 'POST',
       headers: 
       {
         'Content-type': 'application/json' 
       },
-      body:JSON.stringify(category.name)
+      // body:JSON.stringify(category.name)
       })
 
 
@@ -87,7 +87,7 @@ const App = () => {
 
   const deleteCategory = async (id) => {
     console.log(id)
-    const res = await fetch(`https://localhost:5001/api/v1/categories/${id}`, { method:'DELETE',})
+    const res = await fetch(`http://acme.com/api/v1/categories/${id}`, { method:'DELETE',})
     setCategories(categories.filter((category) => category.id !== id))
 
 
@@ -107,7 +107,7 @@ const App = () => {
   const updateMovement = async (rowId) => {
     var movement = movements.find(row => row.id == editingCategoryIndex);
 
-    const res = await fetch (`https://localhost:5001/check/api/v1/transactions/${movement.id}`, 
+    const res = await fetch (`http://acme.com/check/api/v1/transactions/${movement.id}`, 
     {
       method: 'PUT',
       headers: {
