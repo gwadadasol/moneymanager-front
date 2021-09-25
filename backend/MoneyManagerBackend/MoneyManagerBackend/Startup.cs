@@ -33,6 +33,8 @@ namespace MoneyManagerBackend
             
             services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
 
+            Console.WriteLine("Use In Memory DB");
+
             services.AddMediatR(typeof(Startup));
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();

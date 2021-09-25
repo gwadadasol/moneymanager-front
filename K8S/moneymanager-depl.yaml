@@ -15,3 +15,17 @@ spec:
       containers:
         - name: moneymanagerservice
           image: gwadadasol/moneymanagerbackend:latest
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: moneymanager-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: moneymanagerservice
+  ports:
+    - name: moneymanagerservice
+      protocol: TCP
+      port: 80
+      targetPort: 80
