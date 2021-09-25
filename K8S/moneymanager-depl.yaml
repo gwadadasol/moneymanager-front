@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moneymanager-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moneymanagerservice
+  template:
+    metadata:
+      labels:
+        app: moneymanagerservice
+    spec:
+      containers:
+        - name: moneymanagerservice
+          image: gwadadasol/moneymanagerbackend:latest
