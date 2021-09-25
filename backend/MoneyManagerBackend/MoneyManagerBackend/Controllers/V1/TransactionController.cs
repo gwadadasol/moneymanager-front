@@ -18,22 +18,22 @@ namespace MoneyManagerBackend.Controllers.V1
         public TransactionController()
         {
             _movements = new List<TransactionDto>();
-            using (var dbContext = new SqliteDbContext())
-            {
-                foreach (var movement in dbContext.Movements)
-                {
-                    _movements.Add(new TransactionDto
-                    {
-                        Id = movement.Id,
-                        Account = movement.AccountNumber,
-                        Description = movement.Description,
-                        Amount = movement.AmountCad,
-                        Date = movement.TransactionDate,
-                        Category = new CategoryDto{Id = -1, Name = ""}
-                    });
-                }
+            // using (var dbContext = new AppDbContext())
+            // {
+            //     foreach (var movement in dbContext.Movements)
+            //     {
+            //         _movements.Add(new TransactionDto
+            //         {
+            //             Id = movement.Id,
+            //             Account = movement.AccountNumber,
+            //             Description = movement.Description,
+            //             Amount = movement.AmountCad,
+            //             Date = movement.TransactionDate,
+            //             Category = new CategoryDto{Id = -1, Name = ""}
+            //         });
+            //     }
 
-            }
+            // }
 
                 
 

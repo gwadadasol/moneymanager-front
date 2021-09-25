@@ -3,6 +3,7 @@ using MediatR;
 using MoneyManagerBackend.Contracts.V1.Requests;
 using MoneyManagerBackend.Domains.Dtos;
 using MoneyManagerBackend.Domains.Model;
+using MoneyManagerBackend.Domains.Repository;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,26 +12,23 @@ namespace MoneyManagerBackend.Contracts.V1.Handlers
 {
     public class CreateCategoryRequestHandler : IRequestHandler<CreateCategoryRequest, CategoryDto>
     {
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
+        private readonly  ICategoryRepository _repository;
 
-        public CreateCategoryRequestHandler(IMapper mapper)
+        public CreateCategoryRequestHandler(IMapper mapper, ICategoryRepository repository)
         {
             _mapper = mapper;
+            _repository = repository;
         }
 
         public async Task<CategoryDto> Handle(CreateCategoryRequest request, CancellationToken cancellationToken)
         {
-            string newCategoryId = string.Empty;
-            using (var dbContext = new SqliteDbContext())
-            {
-                dbContext.Categories.Add(new CategoryEntity() { Name = request.Name });
-                await dbContext.SaveChangesAsync();
+            var category = new CategoryEntity { Name = request.Name };
+        
+            _repository.CreateCategory(category);
+            _repository.SaveChanges();
 
-                CategoryEntity catEnt =  dbContext.Categories.FirstOrDefault(value => value.Name == request.Name);
-                CategoryDto categoryDto = _mapper.Map<CategoryDto>(catEnt);
-
-                return categoryDto;
-            }
+            return _mapper.Map<CategoryDto>(category);
         }
     }
 }

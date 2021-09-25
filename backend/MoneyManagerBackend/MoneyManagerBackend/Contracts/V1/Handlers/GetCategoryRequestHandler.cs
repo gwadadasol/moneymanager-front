@@ -4,6 +4,7 @@ using MoneyManagerBackend.Contracts.V1.Requests;
 using MoneyManagerBackend.Domains;
 using MoneyManagerBackend.Domains.Dtos;
 using MoneyManagerBackend.Domains.Model;
+using MoneyManagerBackend.Domains.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,20 +16,19 @@ namespace MoneyManagerBackend.Contracts.V1.Handlers
     public class GetCategoryRequestHandler : IRequestHandler<GetCategoryRequest, CategoryDto>
     {
 
-        IMapper _mapper;
+        private readonly IMapper _mapper;
+        private readonly ICategoryRepository _repository;
 
-        public GetCategoryRequestHandler(IMapper mapper)
+        public GetCategoryRequestHandler(IMapper mapper, ICategoryRepository repository)
         {
             _mapper = mapper;
+            _repository = repository;
         }
         public Task<CategoryDto> Handle(GetCategoryRequest request, CancellationToken cancellationToken)
         {
-            using (var dbContext = new SqliteDbContext())
-            {
-                var categoryEnt = dbContext.Categories.Where(c => c.Id == request.Id).FirstOrDefault();
+                var categoryEnt = _repository.GetCategoryById(request.Id);
                 var categoryDto = _mapper.Map<CategoryDto>(categoryEnt);
                 return Task.FromResult(categoryDto);
-            }
         }
     }
 }

@@ -2,10 +2,13 @@ using System;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using MoneyManagerBackend.Domains.Model;
+using MoneyManagerBackend.Domains.Repository;
 using MoneyManagerBackend.Installers;
 using MoneyManagerBackend.Options;
 
@@ -13,17 +16,30 @@ namespace MoneyManagerBackend
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; } 
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; } 
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             // services.InstallServicesAssembly(Configuration);
+
+            // services.AddDbContext<AppDbContext>(opt => 
+            // opt.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
+            
+            services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
+
+            services.AddMediatR(typeof(Startup));
+
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddControllers();
             services.AddSwaggerGen();
 
@@ -33,13 +49,8 @@ namespace MoneyManagerBackend
                 {
                     builder.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
                 }));
-
-            // services.AddMvc(options => options.EnableEndpointRouting = false);
-
-            services.AddMediatR(typeof(Startup));
-
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -57,7 +68,7 @@ namespace MoneyManagerBackend
 
             app.UseSwaggerUI(c => c.SwaggerEndpoint(swaggerOptions.UIEndpoint, swaggerOptions.Description));
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 

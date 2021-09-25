@@ -1,6 +1,8 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using MoneyManagerBackend.Contracts.V1.Requests;
 using MoneyManagerBackend.Domains.Model;
+using MoneyManagerBackend.Domains.Repository;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,21 +11,20 @@ namespace MoneyManagerBackend.Contracts.V1.Handlers
 {
     public class DeleteCategoryRequestHandler : IRequestHandler<DeleteCategoryRequest, bool>
     {
+        private readonly IMapper _mapper;
+        private readonly ICategoryRepository _repository;
+
+        public DeleteCategoryRequestHandler(IMapper mapper, ICategoryRepository repository)
+        {
+            _mapper = mapper;
+            _repository = repository;
+        }
+
         public async Task<bool> Handle(DeleteCategoryRequest request, CancellationToken cancellationToken)
         {
-            string newCategoryId = string.Empty;
-            using (var dbContext = new SqliteDbContext())
-            {
-                if ( dbContext.Categories.Any(c => c.Id == request.CategoryId))
-                {
-                    var cat = dbContext.Categories.First(c => c.Id == request.CategoryId);
-                    dbContext.Categories.Remove(cat);
-                    await dbContext.SaveChangesAsync();
-                    return true;
-                }
-
-                return false;
-            }
+            _repository.DeleteCategoryById(request.CategoryId);
+            _repository.SaveChanges();
+            return true;
         }
     }
 }
