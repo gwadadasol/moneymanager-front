@@ -17,3 +17,11 @@ spec:
                 name: moneymanager-clusterip-srv
                 port:
                   number: 80
+          - path: /api/v1/transactions
+            pathType: Prefix
+            backend: 
+              service: 
+                name: moneymanager-clusterip-srv
+                port:
+                  number: 80
+                  
