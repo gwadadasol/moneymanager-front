@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using MoneyManagerBackend.Domains.Model;
 
 namespace MoneyManagerBackend.Domains.Repository
@@ -41,6 +42,11 @@ namespace MoneyManagerBackend.Domains.Repository
         public bool SaveChanges()
         {
            return (_dbContext.SaveChanges() >= 0 );
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _dbContext.SaveChangesAsync() >= 0 );
         }
     }
 }

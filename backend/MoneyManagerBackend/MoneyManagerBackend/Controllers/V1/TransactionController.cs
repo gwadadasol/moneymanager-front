@@ -5,69 +5,34 @@ using Microsoft.AspNetCore.Mvc;
 using MoneyManagerBackend.Contracts.V1;
 using MoneyManagerBackend.Domains.Model;
 using MoneyManagerBackend.Domains.Dtos;
+using MediatR;
+using Microsoft.Extensions.Logging;
+using MoneyManagerBackend.Contracts.V1.Requests;
+using System.Threading.Tasks;
 
 namespace MoneyManagerBackend.Controllers.V1
 {
     [ApiController]
-    [Route("check")]
     public class TransactionController : ControllerBase
     {
-        public readonly List<TransactionDto> _movements;
-        
+        private readonly IMediator _mediator;
+        private readonly ILogger<TransactionController> _logger;
 
-        public TransactionController()
+        public TransactionController(IMediator mediator, ILogger<TransactionController> logger)
         {
-            _movements = new List<TransactionDto>();
-            // using (var dbContext = new AppDbContext())
-            // {
-            //     foreach (var movement in dbContext.Movements)
-            //     {
-            //         _movements.Add(new TransactionDto
-            //         {
-            //             Id = movement.Id,
-            //             Account = movement.AccountNumber,
-            //             Description = movement.Description,
-            //             Amount = movement.AmountCad,
-            //             Date = movement.TransactionDate,
-            //             Category = new CategoryDto{Id = -1, Name = ""}
-            //         });
-            //     }
-
-            // }
-
-                
-
-            //var v = new Movement
-            //{
-            //    Date = new DateTime(2021, 03, 31),
-            //    Account = "1",
-            //    Description = "desc 1",
-            //    Amount = 10
-            //};
-
-            //_movements.Add(v);
+            _mediator = mediator;
+            _logger = logger;
         }
          
         [HttpGet(ApiRoutes.Transaction.GetAll)]
-        public IActionResult GetMovement()
+        public async Task<IActionResult> GetAllTransactions()
         {
-            return Ok(_movements);
+            _logger.LogTrace("GetAllTransactions");
+            var result = await _mediator.Send(new GetTransactionsRequest());
+
+            result.ForEach( t => _logger.LogTrace($" Date:{t.Date}, [Id:{t.Id}, Account:{t.Account}, Amount:{t.Amount}, Desc:{t.Description}]"));
+            
+            return Ok(result);
         }
-
-        [HttpPost(ApiRoutes.Transaction.Create)]
-        public IActionResult Create()
-        {
-            return Ok(1);
-        }
-
-        [HttpPut(ApiRoutes.Transaction.Update)]
-        public IActionResult Update(int transactionId, [FromBody] TransactionDto transaction )
-        {
-            Console.WriteLine(transaction.ToString());
-            return Ok(1);
-        }
-
-
-
     }
 }

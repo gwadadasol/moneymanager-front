@@ -26,7 +26,7 @@ namespace MoneyManagerBackend.Contracts.V1.Handlers
             var category = new CategoryEntity { Name = request.Name };
         
             _repository.CreateCategory(category);
-            _repository.SaveChanges();
+            await _repository.SaveChangesAsync();
 
             return _mapper.Map<CategoryDto>(category);
         }

@@ -16,11 +16,14 @@ namespace MoneyManagerBackend
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; } 
-        
-        public Startup(IConfiguration configuration)
+        public IConfiguration Configuration { get; }
+
+        private readonly IWebHostEnvironment _env;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -28,12 +31,20 @@ namespace MoneyManagerBackend
         {
             // services.InstallServicesAssembly(Configuration);
 
-            // services.AddDbContext<AppDbContext>(opt => 
-            // opt.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
-            
-            services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
 
-            Console.WriteLine("Use In Memory DB");
+            if (_env.IsDevelopment())
+            {
+                Console.WriteLine("Development Mode");
+                Console.WriteLine("Use In Memory DB");
+                services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
+            }
+            else
+            {
+                Console.WriteLine("Production Mode");
+                services.AddDbContext<AppDbContext>(opt =>
+                opt.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
+            }
+
 
             services.AddMediatR(typeof(Startup));
 

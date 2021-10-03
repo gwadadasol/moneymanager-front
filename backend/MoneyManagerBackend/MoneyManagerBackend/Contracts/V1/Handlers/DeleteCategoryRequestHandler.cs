@@ -23,7 +23,7 @@ namespace MoneyManagerBackend.Contracts.V1.Handlers
         public async Task<bool> Handle(DeleteCategoryRequest request, CancellationToken cancellationToken)
         {
             _repository.DeleteCategoryById(request.CategoryId);
-            _repository.SaveChanges();
+            await _repository.SaveChangesAsync();
             return true;
         }
     }
