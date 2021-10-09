@@ -23,15 +23,24 @@ namespace MoneyManagerBackend.Controllers.V1
             _mediator = mediator;
             _logger = logger;
         }
-         
+
         [HttpGet(ApiRoutes.Transaction.GetAll)]
         public async Task<IActionResult> GetAllTransactions()
         {
             _logger.LogTrace("GetAllTransactions");
             var result = await _mediator.Send(new GetTransactionsRequest());
 
-            result.ForEach( t => _logger.LogTrace($" Date:{t.Date}, [Id:{t.Id}, Account:{t.Account}, Amount:{t.Amount}, Desc:{t.Description}]"));
-            
+            result.ForEach(t => _logger.LogTrace($" Date:{t.Date}, [Id:{t.Id}, Account:{t.Account}, Amount:{t.Amount}, Desc:{t.Description}]"));
+
+            return Ok(result);
+        }
+
+        [HttpPost(ApiRoutes.Transaction.Create)]
+        public async Task<IActionResult> CreateTransaction([FromBody] TransactionDto transaction)
+        {
+            _logger.LogTrace("AddTransaction");
+
+            var result =  await _mediator.Send(new CreateTransactionRequest {Transaction = transaction});
             return Ok(result);
         }
     }

@@ -7,11 +7,11 @@ namespace MoneyManagerBackend.Domains.Repository
     public interface ITransactionRepository
     {
         bool SaveChanges();
-        // Task<bool> SaveChangesAsync();
+        Task<bool> SaveChangesAsync();
 
 
         IEnumerable<TransactionEntity> GetAllTransactions();
-        // TransactionEntity GetTransactionById(int id);
-        // void CreateTransaction(TransactionEntity category);
+        TransactionEntity GetTransactionById(int id);
+        void CreateTransaction(TransactionEntity category);
     }
 }
