@@ -19,14 +19,14 @@ const useStyles = makeStyles((theme) => ({
 
   
 
-const CategoriesCombobox = ({categories, selectedValue, onChangeMovementCategory}) => {
+const CategoriesCombobox = ({categories, selectedValue, onChangeMovementCategory: onChangeTransactionCategory}) => {
     console.log(selectedValue);
 
         const classes = useStyles();
 
         const handleChange = (event) => {
             var value = event.target.value;
-            onChangeMovementCategory( value);
+            onChangeTransactionCategory( value);
             console.log("handleChange ", value);
         };
 
@@ -36,9 +36,8 @@ const CategoriesCombobox = ({categories, selectedValue, onChangeMovementCategory
         value={selectedValue}
         onChange={handleChange}
         >
-          {categories.map((category) => ( <option key={category.id} value={category.id}>{category.name}</option>))}
-          <option value="None">None</option>
-
+          {categories.map((category) => ( <option key={category.id} value={category.name}>{category.name}</option>))}
+          
 
         </NativeSelect>
             </div>

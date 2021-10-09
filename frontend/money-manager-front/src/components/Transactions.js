@@ -1,4 +1,4 @@
-import Movement from "./Movement"
+import Transaction from "./Transaction"
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -21,20 +21,22 @@ const useStyles = makeStyles({
     },
   });
 
-const Movements = ({
-  movements, 
+const Transactions = ({
+  transactions, 
   categories,
-  onLoadMovements, 
+  onLoadTransactions, 
   startEditingCategory,
   stopEditingCategory,
   editIdx,
-  onChangeMovementCategory
+  onChangeTransactionCategory
 }) => {
     const classes = useStyles();
+    console.log('transaction Values ', transactions)
+    console.log('editIdx ', editIdx)
     return (
       <>  
         <Container maxWidth="md">
-        <Button onClick={() => {onLoadMovements() }} >Load Data</Button>
+        <Button onClick={() => {onLoadTransactions() }} >Load Data</Button>
     <TableContainer component={Paper}>
     <Table className={classes.table} size="small" aria-label="simple table">
         <TableHead style={{ backgroundColor: '#546E7A' }} > 
@@ -49,14 +51,14 @@ const Movements = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {movements.map((row) => (
+          {transactions.map((row) => (
             <TableRow key={row.id}>
               <TableCell>{row.id}</TableCell>
               <TableCell>{(new Date(row.date)).toLocaleDateString()}</TableCell>
               <TableCell>{row.amount}</TableCell>
               <TableCell>{row.description}</TableCell>
-              <TableCell> {row.id ===  editIdx? (<CategoriesCombobox categories={categories} selectedValue={row.category} onChangeMovementCategory={onChangeMovementCategory}/>):(row.category)}</TableCell> 
-              <TableCell> {row.id ===  editIdx? (<DoneIcon  onClick={() => stopEditingCategory(row.id)}/> ) : (<EditIcon onClick={() => startEditingCategory(row.id, row.category)}/>)} </TableCell>
+              <TableCell> {row.id ==  editIdx? (<CategoriesCombobox categories={categories} selectedValue={row.category==null?'None':row.category} onChangeMovementCategory={onChangeTransactionCategory}/>):(row.category)}</TableCell> 
+              <TableCell> {row.id ==  editIdx? (<DoneIcon  onClick={() => stopEditingCategory(row.id)}/> ) : (<EditIcon onClick={() => startEditingCategory(row.id, row.category)}/>)} </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -68,6 +70,6 @@ const Movements = ({
     )
 }
 
-export default Movements
+export default Transactions
 
 // <TextField name={row.id} value={row.category} />
