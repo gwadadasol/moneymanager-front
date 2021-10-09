@@ -9,8 +9,7 @@ namespace MoneyManagerBackend.Domains.Dtos
         public string Description { get; set; }
         public decimal Amount { get; set; }
         public string Account { get; set; }
-
-        public CategoryDto Category { get; set; }
+        public string Category { get; set; }
         
     }
 }

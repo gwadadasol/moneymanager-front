@@ -43,5 +43,14 @@ namespace MoneyManagerBackend.Controllers.V1
             var result =  await _mediator.Send(new CreateTransactionRequest {Transaction = transaction});
             return Ok(result);
         }
+
+         [HttpPut(ApiRoutes.Transaction.Update)]
+        public async Task<IActionResult> UpdateTransaction(int transactionId, [FromBody] TransactionDto transaction)
+        {
+            _logger.LogTrace("AddTransaction");
+
+            var result =  await _mediator.Send(new UpdateTransactionRequest {Transaction = transaction});
+            return Ok(result);
+        }       
     }
 }

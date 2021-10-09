@@ -21,8 +21,11 @@ namespace MoneyManagerBackend.Domains.Model
         [Column(TypeName = "decimal(18,4)")]
         [Required]
         public decimal AmountCad { get; set; }
+        
+        [Required]
+        public string AccountNumber { get; set; }
 
         
-        public string AccountNumber { get; set; }
+        public string Category  { get; set; }
     }
 }

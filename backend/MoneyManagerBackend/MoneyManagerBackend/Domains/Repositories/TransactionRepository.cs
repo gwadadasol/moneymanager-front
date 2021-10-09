@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using MoneyManagerBackend.Domains.Model;
 
 namespace MoneyManagerBackend.Domains.Repository
@@ -41,6 +42,11 @@ namespace MoneyManagerBackend.Domains.Repository
         public async Task<bool>  SaveChangesAsync()
         {
             return (await _dbContext.SaveChangesAsync() >= 0 );
+        }
+
+        public void UpdateTransaction(TransactionEntity transaction)
+        {
+             _dbContext.Entry(transaction).State = EntityState.Modified;
         }
     }
 }

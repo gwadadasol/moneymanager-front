@@ -12,6 +12,8 @@ namespace MoneyManagerBackend.Domains.Repository
 
         IEnumerable<TransactionEntity> GetAllTransactions();
         TransactionEntity GetTransactionById(int id);
-        void CreateTransaction(TransactionEntity category);
+        void CreateTransaction(TransactionEntity transaction);
+
+        void UpdateTransaction(TransactionEntity transaction);
     }
 }
