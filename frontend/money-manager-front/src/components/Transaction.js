@@ -1,13 +1,13 @@
 
-const Movement = ({movement}) => {
+const Transaction = ({transaction}) => {
     return (
         <div >
-            <p>Date: {movement.date}</p>
-            <p>Amount: {movement.amount}</p>
-            <p>Description: {movement.description}</p>
-            <p>Account: {movement.account}</p>
+            <p>Date: {transaction.date}</p>
+            <p>Amount: {transaction.amount}</p>
+            <p>Description: {transaction.description}</p>
+            <p>Account: {transaction.account}</p>
         </div>
     )
 }
 
-export default Movement
+export default Transaction
