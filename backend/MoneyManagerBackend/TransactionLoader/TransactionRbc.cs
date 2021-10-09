@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace TransactionLoader
 {
-	public class Transaction
+	public class TransactionRbc
 	{
 		[Name("Account Number")]
-		public string AccountNumber { get; set; }
+		public string Account { get; set; }
 
 		[Name("Transaction Date")]
 		public DateTime Date { get; set; }
@@ -22,6 +22,7 @@ namespace TransactionLoader
 		public string Description2 { get; set; }
 
 		[Name("CAD$")]
-		public double AmountCad { get; set; }
+		public double Amount { get; set; }		    
 	}
 }
+
