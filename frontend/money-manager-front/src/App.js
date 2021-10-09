@@ -5,6 +5,7 @@ import AddTask from './components/AddTask';
 import Movements from "./components/Movements";
 import AddCategory from "./components/AddCategory";
 import CategoriesCombobox from "./components/CategoriesCombobox";
+import reportWebVitals from "./reportWebVitals";
 
 const App = () => {
   
@@ -15,10 +16,11 @@ const App = () => {
 
   const [showAdmin,setShowAdmin] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [editingCategoryIndex, setEditingCategoryIndex] = useState(-1);
+  const [editingTransactionRowIndex, setEditingTransactionRowIndex] = useState(-1);
   const [editingCategoryValue, setEditingCategoryValue] = useState('');
 
-
+  const baseUrl = 'https://localhost:5001' ;
+  // const baseUrl = 'http://acme.com' ;
 
 
 
@@ -32,26 +34,27 @@ const App = () => {
   }, [])
 
   const fetchMovements = async () => {
-    const res = await fetch('http://acme.com/check/api/v1/transactions')
+    const res = await fetch(baseUrl + '/api/v1/transactions')
     const data = await res.json()
 
-    // console.log(data)
+    console.log(data)
     return data
   }
 
   const displayMovements = async () => {
+    console.log(displayMovements)
     const movementsFromServer = await fetchMovements()
 
     var movementsWithCategory = [];
 
     movementsFromServer.map( (mvt) =>  { movementsWithCategory.push(mvt.hasOwnProperty('category')?mvt:{...mvt, 'category':'None'})} );
-    // console.log(movementsWithCategory);
+    console.log(movementsWithCategory);
 
     setMovements(movementsWithCategory);
   }
 
   const fetchCategories = async () => {
-    const res = await fetch('http://acme.com/api/v1/categories')
+    const res = await fetch(baseUrl + '/api/v1/categories')
     const data = await res.json()
 
     return data
@@ -67,7 +70,7 @@ const App = () => {
 
   const addCategory =  async (category) => {
     console.log(category);
-    const res = await fetch (`http://acme.com/api/v1/categories/${category.name}`, 
+    const res = await fetch (baseUrl +  `/api/v1/categories/${category.name}`, 
     {
       method: 'POST',
       headers: 
@@ -87,7 +90,7 @@ const App = () => {
 
   const deleteCategory = async (id) => {
     console.log(id)
-    const res = await fetch(`http://acme.com/api/v1/categories/${id}`, { method:'DELETE',})
+    const res = await fetch(baseUrl + `/api/v1/categories/${id}`, { method:'DELETE',})
     setCategories(categories.filter((category) => category.id !== id))
 
 
@@ -100,14 +103,28 @@ const App = () => {
   }
 
   const startEditingCategory = (rowId, categoryValue) => {
-    setEditingCategoryIndex(rowId);
-    setEditingCategoryValue(categoryValue);
+    console.log('rowId ',rowId)
+
+    if (categoryValue == null)
+    {
+      categoryValue = 'None'
+    }
+
+    console.log('categoryValue ',categoryValue)
+    setEditingTransactionRowIndex(rowId);
+    setEditingCategoryValue(!categoryValue ? 'None':categoryValue)
+    console.log('movements ', movements)
+   setMovements( movements.map(
+      (mvt) => mvt.id === rowId ? { ...mvt, category: categoryValue } : mvt
+    ))
+    console.log('movements ', movements)
+
   }
 
   const updateMovement = async (rowId) => {
-    var movement = movements.find(row => row.id == editingCategoryIndex);
+    var movement = movements.find(row => row.id === editingTransactionRowIndex);
 
-    const res = await fetch (`http://acme.com/check/api/v1/transactions/${movement.id}`, 
+    const res = await fetch (baseUrl + `/api/v1/transactions/${movement.id}`, 
     {
       method: 'PUT',
       headers: {
@@ -125,19 +142,20 @@ const App = () => {
 
     await updateMovement(rowId);
    
-    setEditingCategoryIndex(-1);
+    setEditingTransactionRowIndex(-1);
   }
 
   const onChangeMovementCategory = (categoryIndex) =>
   {
     setEditingCategoryValue(categoryIndex);
-    var movement = movements.find(row => row.id == editingCategoryIndex);
+    var movement = movements.find(row => row.id == editingTransactionRowIndex);
     var category = categories.find(c => c.id == categoryIndex);
 
-    console.log ('editingCategoryIndex -> ' + editingCategoryIndex);
-    console.log (movement);
-    console.log (category);
-    console.log (categories);
+    console.log ('editingCategoryIndex -> ' + editingTransactionRowIndex);
+    console.log ('categoryIndex -> ' + categoryIndex);
+    console.log ('movement', movement);
+    console.log ('category', category);
+    console.log ('categories', categories);
 
     movement.category = category.name;
   }
@@ -148,14 +166,13 @@ const App = () => {
     // <div className="container">
     <div>
       <Header title="Money Manager" onAdd={(showAdmin) => {setShowFormAddTask(showAdmin); console.log(showAdmin); }} showAdd={showFormAddTask} />
-      {<CategoriesCombobox categories={categories} selectedValue='' onChangeMovementCategory={onChangeMovementCategory}/>}
       { !showFormAddTask && <Movements 
       movements={movements}
       categories={categories} 
       onLoadMovements={displayMovements}
       startEditingCategory={startEditingCategory}
       stopEditingCategory={stopEditingCategory}
-      editIdx={editingCategoryIndex}
+      editIdx={editingTransactionRowIndex}
       onChangeMovementCategory={onChangeMovementCategory}
       /> }
       {showFormAddTask && <AddCategory categories={categories} onAdd={addCategory} onDelete={deleteCategory}  />}
