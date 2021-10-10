@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MoneyManagerBackend.Installers
+namespace TransactionService.Installers
 {
     public interface IInstaller
     {

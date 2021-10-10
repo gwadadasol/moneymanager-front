@@ -1,7 +1,7 @@
 using MediatR;
-using MoneyManagerBackend.Domains.Dtos;
+using TransactionService.Domains.Dtos;
 
-namespace MoneyManagerBackend.Contracts.V1
+namespace TransactionService.Contracts.V1
 {
     public class UpdateTransactionRequest : IRequest<TransactionDto>
     {

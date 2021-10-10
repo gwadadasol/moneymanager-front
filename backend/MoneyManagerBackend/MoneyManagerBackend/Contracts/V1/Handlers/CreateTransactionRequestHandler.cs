@@ -2,11 +2,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using MoneyManagerBackend.Domains.Dtos;
-using MoneyManagerBackend.Domains.Model;
-using MoneyManagerBackend.Domains.Repository;
+using TransactionService.Domains.Dtos;
+using TransactionService.Domains.Model;
+using TransactionService.Domains.Repository;
 
-namespace MoneyManagerBackend.Contracts.V1.Handlers
+namespace TransactionService.Contracts.V1.Handlers
 {
     public class CreateTransactionRequestHandler : IRequestHandler<CreateTransactionRequest, TransactionDto>
     {

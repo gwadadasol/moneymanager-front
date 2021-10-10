@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using MoneyManagerBackend.Domains;
-using MoneyManagerBackend.Domains.Dtos;
+using TransactionService.Domains;
+using TransactionService.Domains.Dtos;
 
-namespace MoneyManagerBackend.Services
+namespace TransactionService.Services
 {
     public interface ITransactionService
     {

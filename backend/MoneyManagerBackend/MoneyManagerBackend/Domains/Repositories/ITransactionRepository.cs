@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MoneyManagerBackend.Domains.Model;
+using TransactionService.Domains.Model;
 
-namespace MoneyManagerBackend.Domains.Repository
+namespace TransactionService.Domains.Repository
 {
     public interface ITransactionRepository
     {

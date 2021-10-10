@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MoneyManagerBackend.Installers
+namespace TransactionService.Installers
 {
     public static class InstallerExtensions
     {

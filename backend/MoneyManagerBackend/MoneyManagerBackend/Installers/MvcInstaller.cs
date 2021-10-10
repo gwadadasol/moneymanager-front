@@ -2,7 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace MoneyManagerBackend.Installers
+namespace TransactionService.Installers
 {
     public class MvcInstaller : IInstaller
     {

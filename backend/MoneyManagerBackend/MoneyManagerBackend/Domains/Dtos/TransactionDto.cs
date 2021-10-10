@@ -1,6 +1,6 @@
 using System;
 
-namespace MoneyManagerBackend.Domains.Dtos
+namespace TransactionService.Domains.Dtos
 {
     public class TransactionDto
     {

@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
-using MoneyManagerBackend.Domains;
+using TransactionService.Domains;
 using Microsoft.AspNetCore.Mvc;
-using MoneyManagerBackend.Contracts.V1;
-using MoneyManagerBackend.Domains.Model;
-using MoneyManagerBackend.Domains.Dtos;
+using TransactionService.Contracts.V1;
+using TransactionService.Domains.Model;
+using TransactionService.Domains.Dtos;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using MoneyManagerBackend.Contracts.V1.Requests;
+using TransactionService.Contracts.V1.Requests;
 using System.Threading.Tasks;
 
-namespace MoneyManagerBackend.Controllers.V1
+namespace TransactionService.Controllers.V1
 {
     [ApiController]
     public class TransactionController : ControllerBase

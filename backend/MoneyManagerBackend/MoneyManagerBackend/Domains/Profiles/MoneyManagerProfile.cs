@@ -1,8 +1,8 @@
 using AutoMapper;
-using MoneyManagerBackend.Domains.Dtos;
-using MoneyManagerBackend.Domains.Model;
+using TransactionService.Domains.Dtos;
+using TransactionService.Domains.Model;
 
-namespace MoneyManagerBackend.Domains.Profiles
+namespace TransactionService.Domains.Profiles
 {
     public class MoneyManagerProfile : Profile
     {

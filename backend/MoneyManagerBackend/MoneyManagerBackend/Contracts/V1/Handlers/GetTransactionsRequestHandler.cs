@@ -4,11 +4,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using MoneyManagerBackend.Contracts.V1.Requests;
-using MoneyManagerBackend.Domains.Dtos;
-using MoneyManagerBackend.Domains.Repository;
+using TransactionService.Contracts.V1.Requests;
+using TransactionService.Domains.Dtos;
+using TransactionService.Domains.Repository;
 
-namespace MoneyManagerBackend.Contracts.V1.Handlers
+namespace TransactionService.Contracts.V1.Handlers
 {
     public class GetTransactionsRequestHandle : IRequestHandler<GetTransactionsRequest, List<TransactionDto>>
     {

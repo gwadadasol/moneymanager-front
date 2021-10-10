@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MoneyManagerBackend.Domains.Model
+namespace TransactionService.Domains.Model
 {
     public class TransactionEntity
     {

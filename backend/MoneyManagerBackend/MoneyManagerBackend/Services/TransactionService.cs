@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MoneyManagerBackend.Domains;
-using MoneyManagerBackend.Domains.Dtos;
+using TransactionService.Domains;
+using TransactionService.Domains.Dtos;
 
-namespace MoneyManagerBackend.Services
+namespace TransactionService.Services
 {
     public class TransactionService : ITransactionService
     {

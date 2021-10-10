@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MoneyManagerBackend.Domains.Model;
+using TransactionService.Domains.Model;
 
-namespace MoneyManagerBackend.Migrations
+namespace TransactionService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20210925011749_initialmigration")]

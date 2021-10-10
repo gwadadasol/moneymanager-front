@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using MoneyManagerBackend.Domains.Model;
+using TransactionService.Domains.Model;
 
-namespace MoneyManagerBackend.Domains.Repository
+namespace TransactionService.Domains.Repository
 {
     public class TransactionRepository : ITransactionRepository
     {

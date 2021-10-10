@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using MediatR;
-using MoneyManagerBackend.Domains.Dtos;
+using TransactionService.Domains.Dtos;
 
-namespace MoneyManagerBackend.Contracts.V1.Requests
+namespace TransactionService.Contracts.V1.Requests
 {
     public class GetTransactionsRequest: IRequest<List<TransactionDto>> { }
 }

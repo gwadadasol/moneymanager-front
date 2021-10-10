@@ -1,6 +1,6 @@
 using System;
 
-namespace MoneyManagerBackend.Contracts.V1
+namespace TransactionService.Contracts.V1
 {
     public class UpdateMovementRequest    
     {

@@ -7,12 +7,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using MoneyManagerBackend.Domains.Model;
-using MoneyManagerBackend.Domains.Repository;
-using MoneyManagerBackend.Installers;
-using MoneyManagerBackend.Options;
+using TransactionService.Domains.Model;
+using TransactionService.Domains.Repository;
+using TransactionService.Installers;
+using TransactionService.Options;
 
-namespace MoneyManagerBackend
+namespace TransactionService
 {
     public class Startup
     {
