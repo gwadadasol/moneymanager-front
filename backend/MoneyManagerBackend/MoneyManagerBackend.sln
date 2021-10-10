@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyManagerBackend", "Mone
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransactionLoader", "TransactionLoader\TransactionLoader.csproj", "{D0E434A7-FBD1-4E6C-A33A-E4ADF3CAE06F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CategoryService", "CategoryService\CategoryService.csproj", "{35BA4B4A-AD86-4A5A-8420-54A802F6343B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D0E434A7-FBD1-4E6C-A33A-E4ADF3CAE06F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0E434A7-FBD1-4E6C-A33A-E4ADF3CAE06F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0E434A7-FBD1-4E6C-A33A-E4ADF3CAE06F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35BA4B4A-AD86-4A5A-8420-54A802F6343B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35BA4B4A-AD86-4A5A-8420-54A802F6343B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35BA4B4A-AD86-4A5A-8420-54A802F6343B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35BA4B4A-AD86-4A5A-8420-54A802F6343B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
