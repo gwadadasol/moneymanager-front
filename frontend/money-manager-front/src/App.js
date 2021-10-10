@@ -19,7 +19,8 @@ const App = () => {
   const [editingTransactionRowIndex, setEditingTransactionRowIndex] = useState(-1);
   const [editingCategoryValue, setEditingCategoryValue] = useState('');
 
-  const baseUrl = 'https://localhost:5001' ;
+  const baseUrlTransaction = 'https://localhost:5001' ;
+  const baseUrlCategory = 'https://localhost:5011' ;
   // const baseUrl = 'http://acme.com' ;
 
 
@@ -36,7 +37,7 @@ const App = () => {
 
   // Transactions
   const fetchTransactions = async () => {
-    const res = await fetch(baseUrl + '/api/v1/transactions')
+    const res = await fetch(baseUrlTransaction + '/api/v1/transactions')
     const data = await res.json()
 
     console.log(data)
@@ -53,7 +54,7 @@ const App = () => {
   const updateTransaction = async (rowId) => {
     var transaction = transactions.find(row => row.id === editingTransactionRowIndex);
 
-    const res = await fetch (baseUrl + `/api/v1/transactions/${transaction.id}`, 
+    const res = await fetch (baseUrlTransaction + `/api/v1/transactions/${transaction.id}`, 
     {
       method: 'PUT',
       headers: {
@@ -69,7 +70,7 @@ const App = () => {
 
   //  Categories
   const fetchCategories = async () => {
-    const res = await fetch(baseUrl + '/api/v1/categories')
+    const res = await fetch(baseUrlCategory + '/api/v1/categories')
     const data = await res.json()
 
     return data
@@ -84,7 +85,7 @@ const App = () => {
 
   const addCategory =  async (category) => {
     console.log(category);
-    const res = await fetch (baseUrl +  `/api/v1/categories/${category.name}`, 
+    const res = await fetch (baseUrlCategory +  `/api/v1/categories/${category.name}`, 
     {
       method: 'POST',
       headers: 
@@ -104,7 +105,7 @@ const App = () => {
 
   const deleteCategory = async (id) => {
     console.log(id)
-    const res = await fetch(baseUrl + `/api/v1/categories/${id}`, { method:'DELETE',})
+    const res = await fetch(baseUrlCategory + `/api/v1/categories/${id}`, { method:'DELETE',})
     setCategories(categories.filter((category) => category.id !== id))
 
 
