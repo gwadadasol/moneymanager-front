@@ -18,9 +18,6 @@ namespace MoneyManagerBackend.Domains.Profiles
             .ForMember(entity => entity.AmountCad, map => map.MapFrom(dto => dto.Amount))
             .ForMember(entity => entity.TransactionDate, map => map.MapFrom(dto => dto.Date))
             .ForMember(entity => entity.AccountNumber, map => map.MapFrom(dto => dto.Account));
-
-            CreateMap<CategoryEntity, CategoryDto>();
-            CreateMap<CategoryDto, CategoryEntity>();
         }
     }
 }

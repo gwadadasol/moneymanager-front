@@ -9,7 +9,6 @@ namespace MoneyManagerBackend.Domains.Model
     public class AppDbContext : DbContext
     {
         public DbSet<TransactionEntity> Transactions { get; set; }
-        public DbSet<CategoryEntity> Categories { get; set; }
 
         public AppDbContext( DbContextOptions<AppDbContext> opt):base(opt)
         {

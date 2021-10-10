@@ -48,7 +48,6 @@ namespace MoneyManagerBackend
 
             services.AddMediatR(typeof(Startup));
 
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
