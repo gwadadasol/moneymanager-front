@@ -14,9 +14,9 @@ const AdminPanel = ({categories, addCategory, deleteCategory} ) => {
         <div>
         
 
-<form className='add-category' >
-<CategoriesCombobox categories={categories}/><input id='category-name' variant='outlined' label='Category Name' />
-<input type="submit" variant="contained" value='Add'/>
+<form className='add-rule' >
+<CategoriesCombobox categories={categories}/><input id='rule-name' variant='outlined' label='Rule pattern' />
+<input type="submit" variant="contained" value='Create'/>
 
 <table>
 <tbody>
