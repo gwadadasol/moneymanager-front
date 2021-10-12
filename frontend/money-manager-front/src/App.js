@@ -6,6 +6,7 @@ import Transactions from "./components/Transactions";
 import AddCategory from "./components/AddCategory";
 import CategoriesCombobox from "./components/CategoriesCombobox";
 import reportWebVitals from "./reportWebVitals";
+import AdminPanel from "./components/AdminPanel";
 
 const App = () => {
   
@@ -179,11 +180,12 @@ const App = () => {
       editIdx={editingTransactionRowIndex}
       onChangeTransactionCategory={onChangeTransactionCategory}
       /> }
-      {showFormAddTask && <AddCategory categories={categories} onAdd={addCategory} onDelete={deleteCategory}  />}
+      {showFormAddTask && <AdminPanel categories={categories} addCategory={addCategory} deleteCategory={deleteCategory}  />}
 
     </div>
   )
 }
+//       {showFormAddTask && <AddCategory categories={categories} onAdd={addCategory} onDelete={deleteCategory}  />}
 
 export default App;
 

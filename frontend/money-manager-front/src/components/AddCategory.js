@@ -26,8 +26,13 @@ const AddCategory = ({ categories, onAdd, onDelete }) => {
 
         setText('')
     }
+    categories.map( (cat) => {
+    console.log(cat.id, cat.name)
+    }
+    )
 
     return (
+        
         <div>
             <form className='add-category' onSubmit={onSubmit}>
                 <input id='category-name' variant='outlined' label='Category Name' value={name} onChange={(event) => setText(event.target.value)} />
