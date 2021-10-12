@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using CategoryService.Contracts.V1;
 using CategoryService.Contracts.V1.Requests;
+using CategoryService.Domains.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -27,6 +28,7 @@ namespace CategoryService.Controllers.V1
             var result = await _mediator.Send(new GetCategoriesRequest());
             return Ok(result);
         }
+
         [HttpGet(ApiRoutes.Category.Get, Name = "GetCategoryById")]
         public async Task<IActionResult> GetCategoryById(int categoryId)
         {
@@ -67,5 +69,50 @@ namespace CategoryService.Controllers.V1
             return result ? Ok() : NotFound();
 
         }
+
+        [HttpPost(ApiRoutes.Rule.Create)]
+        public async Task<IActionResult> CreateRule(RuleDto rule)
+        {
+            _logger.LogTrace("Create");
+
+            var result = await _mediator.Send(new CreateRuleRequest() { Rule = rule });
+
+            if (result != null)
+            {
+                // var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
+                // var locationUri = $"{baseUrl}/{ApiRoutes.Category.Get.Replace("{categoryId}", result.Id.ToString())}";
+                // return Created(locationUri, result);
+
+                _logger.LogTrace($"Result:[Category:{result.Category}, Pattern:{result.Pattern}]");
+                // return CreatedAtRoute(nameof(GetRuleByCategoryName), new { categoryName = result.Category }, result);
+                return Ok(result);
+            }
+            else
+                return NotFound();
+        }
+
+        [HttpGet(ApiRoutes.Rule.Get, Name = "GetRuleByCategoryName")]
+        public async Task<IActionResult> GetRuleByCategoryName(string categoryName)
+        {
+            _logger.LogTrace("GetRuleByCategoryName");
+            var result = await _mediator.Send(new GetRuleByCategoryNameRequest() { Category = categoryName });
+
+            if (result != null)
+            {
+                _logger.LogTrace($"Result:[Id:{result.Category}, Name:{result.Pattern}]");
+            }
+            return result != null ? Ok(result) : NotFound();
+        }
+
+        [HttpGet(ApiRoutes.Rule.GetAll)]
+        public async Task<IActionResult> GetRules()
+        {
+            _logger.LogTrace("Get all rules");
+            var result = await _mediator.Send(new GetRulesRequest());
+            return Ok(result);
+        }
+
+
+
     }
 }

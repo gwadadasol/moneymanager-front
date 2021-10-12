@@ -13,5 +13,10 @@ namespace CategoryService.Domains.Repository
         CategoryEntity GetCategoryById(int id);
         void CreateCategory(CategoryEntity category);
         void DeleteCategoryById(int id);
+
+        IEnumerable<RuleEntity> GetAllRules();
+         RuleEntity GetRuleByName(string category);
+        void CreateRule(RuleEntity ruleEntity);
+        void DeleteRuleById(string category);
     }
 }

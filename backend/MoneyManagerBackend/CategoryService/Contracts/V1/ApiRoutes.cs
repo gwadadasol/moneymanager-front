@@ -5,8 +5,14 @@ namespace CategoryService.Contracts.V1
         public const string Root = "api";
         public const string Version = "v1";
         public const string Base = Root + "/" + Version;
+        public static class  Rule
+        {
+            public const string GetAll = Base + "/rules";
+            public const string Delete = Base + "/rules/{categoryName}";
+            public const string Get = Base + "/rules/{categoryName}";
+            public const string Create = Base + "/rules";            
+        }
 
-     
         public static class Category
         {
             public const string GetAll = Base + "/categories";

@@ -12,6 +12,9 @@ namespace CategoryService.Domains.Profiles
         {
             CreateMap<CategoryEntity, CategoryDto>();
             CreateMap<CategoryDto, CategoryEntity>();
+            
+            CreateMap<RuleEntity, RuleDto>();
+            CreateMap<RuleDto, RuleEntity>();
 
         }
 

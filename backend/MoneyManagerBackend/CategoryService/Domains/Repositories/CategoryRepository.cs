@@ -23,10 +23,25 @@ namespace CategoryService.Domains.Repository
             _dbContext.Categories.Add(category);
         }
 
+        public void CreateRule(RuleEntity ruleEntity)
+        {
+            if (ruleEntity == null)
+            {
+                throw new ArgumentNullException(nameof(ruleEntity));
+            }
+            _dbContext.Rules.Add(ruleEntity);
+        }
+
         public void DeleteCategoryById(int id)
         {
             var category = _dbContext.Categories.FirstOrDefault(c => c.Id == id);
             _dbContext.Categories.Remove(category);
+        }
+
+        public void DeleteRuleById(string category)
+        {
+            var rule = _dbContext.Rules.FirstOrDefault(r => r.Category == category);
+            _dbContext.Rules.Remove(rule);
         }
 
         public IEnumerable<CategoryEntity> GetAllCategories()
@@ -34,9 +49,19 @@ namespace CategoryService.Domains.Repository
             return _dbContext.Categories.ToList();
         }
 
+        public IEnumerable<RuleEntity> GetAllRules()
+        {
+              return _dbContext.Rules.ToList();
+        }
+
         public CategoryEntity GetCategoryById(int id)
         {
             return _dbContext.Categories.FirstOrDefault(c => c.Id == id);
+        }
+
+        public RuleEntity GetRuleByName(string category)
+        {
+            return _dbContext.Rules.FirstOrDefault(r => r.Category == category);
         }
 
         public bool SaveChanges()
