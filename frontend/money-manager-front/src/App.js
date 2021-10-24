@@ -19,6 +19,7 @@ const App = () => {
   const [categories, setCategories] = useState([]);
   const [editingTransactionRowIndex, setEditingTransactionRowIndex] = useState(-1);
   const [editingCategoryValue, setEditingCategoryValue] = useState('');
+  const [categoryRules, setCategoryRules] = useState([]);
 
   const baseUrlTransaction = 'https://localhost:5001' ;
   const baseUrlCategory = 'https://localhost:5011' ;
@@ -31,8 +32,12 @@ const App = () => {
     const getCategories = async () => {
       await updateCategories(); 
     }
+    const getCategoryRules = async () => {
+      await updateCategoryRules(); 
+    }
 
-    getCategories()
+    getCategories();
+    getCategoryRules();
   }, [])
 
 
@@ -118,6 +123,51 @@ const App = () => {
     // categories.map((cat) => console.log(cat));
   }
 
+
+  // CategoryRules
+  const addCategoryRule =  async (category, pattern) => {
+    console.log(category, pattern);
+    const res = await fetch (baseUrlCategory +  `/api/v1/rules`, 
+    {
+      method: 'POST',
+      headers: 
+      {
+        'Content-type': 'application/json' 
+      },
+      body:JSON.stringify({"category":category, "pattern":pattern})
+      });
+
+
+      await updateCategoryRules(); 
+    // const newCategories = await fetchCategories();
+
+    // setCategories(newCategories);
+    // categories.map((cat) => console.log(cat));
+  }
+  const fetchCategoryRules = async () => {
+    const res = await fetch(baseUrlCategory + '/api/v1/rules')
+    console.log('fetchCategoryRules res:', res);
+    
+    const data = await res.json()
+
+    console.log('fetchCategoryRules data:', data);
+    return data
+  }
+  const updateCategoryRules = async () => {
+    const newCategoryRules = await fetchCategoryRules();
+
+    setCategoryRules(newCategoryRules);
+    categoryRules.map((cat) => console.log(cat));
+  }
+  const deleteCategoryRules = async (id) => {
+    console.log(id)
+    const res = await fetch(baseUrlCategory + `/api/v1/rules/${id}`, { method:'DELETE',})
+    setCategoryRules(categoryRules.filter((categoryRule) => categoryRule.id !== id))
+
+
+    await updateCategoryRules(); 
+  }
+
   // Front end event
   const startEditingCategory = (rowId, categoryValue) => {
     console.log('rowId ',rowId)
@@ -180,7 +230,7 @@ const App = () => {
       editIdx={editingTransactionRowIndex}
       onChangeTransactionCategory={onChangeTransactionCategory}
       /> }
-      {showFormAddTask && <AdminPanel categories={categories} addCategory={addCategory} deleteCategory={deleteCategory}  />}
+      {showFormAddTask && <AdminPanel categories={categories} categoryRules={categoryRules} addCategory={addCategory} deleteCategory={deleteCategory} addCategoryRule={addCategoryRule} deleteCategoryRules={deleteCategoryRules}/>}
 
     </div>
   )

@@ -1,38 +1,22 @@
 import React from 'react'
 import AddCategory from './AddCategory'
+import AddCategoryRule from './AddCategoryRule'
 import CategoriesCombobox from './CategoriesCombobox'
 
-const AdminPanel = ({categories, addCategory, deleteCategory} ) => {
+const AdminPanel = ({ categories, categoryRules, addCategory, deleteCategory, addCategoryRule, deleteCategoryRules }) => {
+
     return (
         <div>
-        <div>
-            <AddCategory categories={categories} onAdd={addCategory} onDelete={deleteCategory} />            
+            <div>
+                <AddCategory categories={categories} onAdd={addCategory} onDelete={deleteCategory} />
+            </div>
+            <br />
+            <br />
+            <br />
+            <div>
+                <AddCategoryRule categories={categories} categoryRules={categoryRules} onAdd={addCategoryRule} onDelete={deleteCategoryRules} />
+            </div>
         </div>
-        <br/>
-        <br/>
-        <br/>
-        <div>
-        
-
-<form className='add-rule' >
-<CategoriesCombobox categories={categories}/><input id='rule-name' variant='outlined' label='Rule pattern' />
-<input type="submit" variant="contained" value='Create'/>
-
-<table>
-<tbody>
-{categories.map((category) => (
-    <tr key={category.id }>
-        <td >{category.name}</td>
-        <td><input id={category.id } type='button' value='delete' /></td>
-    </tr>
-))}
-</tbody>
-</table>
-</form> 
-
-
-</div>
-</div>
     )
 }
 

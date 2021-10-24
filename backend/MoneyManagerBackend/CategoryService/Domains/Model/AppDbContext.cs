@@ -6,6 +6,7 @@ namespace CategoryService.Domains.Model
     {
         public DbSet<CategoryEntity> Categories { get; set; }
         public DbSet<RuleEntity> Rules { get; set; }
+        // public DbSet<CategoryRuleEntity> CategoryRules { get; set; }
 
         public AppDbContext( DbContextOptions<AppDbContext> opt):base(opt)
         {

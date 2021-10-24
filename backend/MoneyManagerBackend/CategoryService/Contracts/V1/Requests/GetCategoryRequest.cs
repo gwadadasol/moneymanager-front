@@ -8,3 +8,4 @@ namespace CategoryService.Contracts.V1.Requests
         public int Id { get; set; }
     }
 }
+

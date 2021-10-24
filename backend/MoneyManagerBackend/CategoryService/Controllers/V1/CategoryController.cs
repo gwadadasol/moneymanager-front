@@ -39,6 +39,15 @@ namespace CategoryService.Controllers.V1
             return result != null ? Ok(result) : NotFound();
         }
 
+        [HttpGet(ApiRoutes.Category.GetByDescription, Name = "GetCategoryByDescription")]
+        public async Task<IActionResult> GetCategoryByDescription(string description)
+        {
+            _logger.LogTrace("GetCategoryByDescription");
+            var result = await _mediator.Send(new GetCategoryByDescriptionRequest() { Description = description });
+
+            return result != null ? Ok(result) : NotFound();
+        }
+
         [HttpPost(ApiRoutes.Category.Create)]
         public async Task<IActionResult> Create(string categoryName)
         {
@@ -110,6 +119,18 @@ namespace CategoryService.Controllers.V1
             _logger.LogTrace("Get all rules");
             var result = await _mediator.Send(new GetRulesRequest());
             return Ok(result);
+        }
+
+
+        [HttpDelete(ApiRoutes.Rule.Delete)]
+        public async Task<IActionResult> DeleteRule(int ruleId)
+        {
+            _logger.LogTrace("Delete");
+            _logger.LogTrace($"Rule to delete:[Id:{ruleId}]");
+            var result = await _mediator.Send(new DeleteRuleRequest() { RuleId = ruleId });
+
+            return result ? Ok() : NotFound();
+
         }
 
 

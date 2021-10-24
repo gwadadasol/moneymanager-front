@@ -17,6 +17,14 @@ namespace CategoryService.Domains.Repository
         IEnumerable<RuleEntity> GetAllRules();
          RuleEntity GetRuleByName(string category);
         void CreateRule(RuleEntity ruleEntity);
-        void DeleteRuleById(string category);
+        void DeleteRuleByCategoryName(string category);
+        void DeleteRuleById(int ruleId);
+
+        // IEnumerable<CategoryRuleEntity> GetAllCategoryRules();
+        CategoryEntity GetCategoryByDescription(string description);
+
+        //  RuleEntity GetCategoryRuleByCategoryName(string categoryName);
+        // void CreateCategoryRule(CategoryRuleEntity categoryRuleEntity);
+        // void DeleteCategoryRuleById(int categoryRuleId);
     }
 }

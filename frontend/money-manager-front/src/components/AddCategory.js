@@ -27,7 +27,7 @@ const AddCategory = ({ categories, onAdd, onDelete }) => {
         setText('')
     }
     categories.map( (cat) => {
-    console.log(cat.id, cat.name)
+    console.log('AddCategory cat:',cat.id, cat.name)
     }
     )
 

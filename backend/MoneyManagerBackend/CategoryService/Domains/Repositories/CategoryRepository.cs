@@ -23,6 +23,15 @@ namespace CategoryService.Domains.Repository
             _dbContext.Categories.Add(category);
         }
 
+        // public void CreateCategoryRule(CategoryRuleEntity categoryRuleEntity)
+        // {
+        //     if (categoryRuleEntity == null)
+        //     {
+        //         throw new ArgumentNullException(nameof(categoryRuleEntity));
+        //     }
+        //     _dbContext.CategoryRules.Add(categoryRuleEntity);
+        // }
+
         public void CreateRule(RuleEntity ruleEntity)
         {
             if (ruleEntity == null)
@@ -38,9 +47,15 @@ namespace CategoryService.Domains.Repository
             _dbContext.Categories.Remove(category);
         }
 
-        public void DeleteRuleById(string category)
+        public void DeleteRuleByCategoryName(string category)
         {
-            var rule = _dbContext.Rules.FirstOrDefault(r => r.Category == category);
+            var rule = _dbContext.Rules.Where(r => r.Category == category);
+            _dbContext.Rules.RemoveRange(rule);
+        }
+
+        public void DeleteRuleById(int ruleId)
+        {
+            var rule = _dbContext.Rules.FirstOrDefault(r => r.Id == ruleId);
             _dbContext.Rules.Remove(rule);
         }
 
@@ -49,9 +64,26 @@ namespace CategoryService.Domains.Repository
             return _dbContext.Categories.ToList();
         }
 
+        // public IEnumerable<CategoryRuleEntity> GetAllCategoryRules()
+        // {
+        //     return _dbContext.CategoryRules.ToList();        
+        // }
+
         public IEnumerable<RuleEntity> GetAllRules()
         {
               return _dbContext.Rules.ToList();
+        }
+
+        public CategoryEntity GetCategoryByDescription(string description)
+        {
+            var rule = _dbContext.Rules.Where(r => description.Contains(r.Pattern)).FirstOrDefault();
+
+            if (rule == null)
+            {
+                return null;
+            }
+
+            return _dbContext.Categories.Where(c => c.Name == rule.Category).FirstOrDefault();
         }
 
         public CategoryEntity GetCategoryById(int id)

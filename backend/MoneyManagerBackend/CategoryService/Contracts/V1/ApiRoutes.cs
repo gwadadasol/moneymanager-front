@@ -8,7 +8,7 @@ namespace CategoryService.Contracts.V1
         public static class  Rule
         {
             public const string GetAll = Base + "/rules";
-            public const string Delete = Base + "/rules/{categoryName}";
+            public const string Delete = Base + "/rules/{ruleId}";
             public const string Get = Base + "/rules/{categoryName}";
             public const string Create = Base + "/rules";            
         }
@@ -19,7 +19,11 @@ namespace CategoryService.Contracts.V1
             //public const string Update = Base + "/categories/{categoryId}";
             public const string Delete = Base + "/categories/{categoryId}";
             public const string Get = Base + "/categories/{categoryId}";
+            public const string GetByDescription = Base + "/categories/description";
             public const string Create = Base + "/categories/{categoryName}";
+
         }
+
+        
     }
 }
