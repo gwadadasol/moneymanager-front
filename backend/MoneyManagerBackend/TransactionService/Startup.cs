@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
+using TransactionService.AsyncDataServices;
 using TransactionService.Domains.Model;
 using TransactionService.Domains.Repository;
-using TransactionService.Installers;
+using TransactionService.EventProcessing;
 using TransactionService.Options;
 
 namespace TransactionService
@@ -47,12 +47,15 @@ namespace TransactionService
 
 
             services.AddMediatR(typeof(Startup));
-
             services.AddScoped<ITransactionRepository, TransactionRepository>();
+            services.AddControllers();
 
+            services.AddHostedService<MessageBusSubscriber>();
+
+
+            services.AddSingleton<IEventProcessor, EventProcessor>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddControllers();
             services.AddSwaggerGen();
 
             services.AddCors(options => options.AddDefaultPolicy(
