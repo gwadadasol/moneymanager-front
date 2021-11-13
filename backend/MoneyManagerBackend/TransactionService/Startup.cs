@@ -57,7 +57,7 @@ namespace TransactionService
             services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddControllers();
 
-            services.AddHostedService<MessageBusSubscriber>();
+            // services.AddHostedService<MessageBusSubscriber>();
 
 
             services.AddSingleton<IEventProcessor, EventProcessor>();
