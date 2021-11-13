@@ -76,7 +76,6 @@ namespace CategoryService.Controllers.V1
             var result = await _mediator.Send(new DeleteCategoryRequest() { CategoryId = categoryId });
 
             return result ? Ok() : NotFound();
-
         }
 
         [HttpPost(ApiRoutes.Rule.Create)]
@@ -121,7 +120,6 @@ namespace CategoryService.Controllers.V1
             return Ok(result);
         }
 
-
         [HttpDelete(ApiRoutes.Rule.Delete)]
         public async Task<IActionResult> DeleteRule(int ruleId)
         {
@@ -132,8 +130,5 @@ namespace CategoryService.Controllers.V1
             return result ? Ok() : NotFound();
 
         }
-
-
-
     }
 }
