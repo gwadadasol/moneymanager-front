@@ -33,14 +33,14 @@ namespace TransactionService
             // services.InstallServicesAssembly(Configuration);
 
 
-            //if (_env.IsDevelopment())
-            //{
-            //    Console.WriteLine("Development Mode");
-            //    Console.WriteLine("Use In Memory DB");
-            //    services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
-            //}
-            //else
-            //{
+            if (_env.IsDevelopment())
+            {
+               Console.WriteLine("Development Mode");
+               Console.WriteLine("Use In Memory DB");
+               services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
+            }
+            else
+            {
                 Console.WriteLine("Production Mode");
 
                 var conStrBuilder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("SqlServer")   );
@@ -48,9 +48,8 @@ namespace TransactionService
                 var connection = conStrBuilder.ConnectionString;
 
                 services.AddDbContext<AppDbContext>(opt =>
-                //opt.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
                 opt.UseSqlServer(connection));
-            //}
+            }
 
 
             services.AddMediatR(typeof(Startup));

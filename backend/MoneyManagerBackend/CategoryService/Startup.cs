@@ -35,24 +35,21 @@ namespace CategoryService
         public void ConfigureServices(IServiceCollection services)
         {
 
-            //    if (_env.IsDevelopment())
-            // {
-            //     Console.WriteLine("Development Mode");
-            //     Console.WriteLine("Use In Memory DB");
-            //     services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
-            // }
-            // else
-            // {
+               if (_env.IsDevelopment())
+            {
+                Console.WriteLine("Development Mode");
+                Console.WriteLine("Use In Memory DB");
+                services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
+            }
+            else
+            {
             Console.WriteLine("Production Mode");
 
             var conStrBuilder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("SqlServer"));
             conStrBuilder.Password = Configuration["AzureSQLPassword"];
             var connection = conStrBuilder.ConnectionString; 
             services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(connection));
-
-            
-            // services.Configure<AzureServiceBusConfiguration>(Configuration.GetSection("AzureServiceBus"));
-
+            }
             services.AddMediatR(typeof(Startup));
             services.AddControllers();
 
