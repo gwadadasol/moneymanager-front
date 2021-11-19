@@ -33,7 +33,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        repository: gwadadasol/money-manager/tree/master/frontend/money-manager-front
+        repository: gwadadasol/money-manager
     - name: Use Node.js ${{ env.NODE_VERSION }}
       uses: actions/setup-node@v2
       with:
