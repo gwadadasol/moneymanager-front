@@ -1,15 +1,12 @@
-import { Button, Container, TextField } from '@material-ui/core'
-import { useState } from "react"
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import { Button, Container } from '@mui/material';
+import { useState } from "react";
+import React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import { Input, TextField } from '@mui/material';
 
 const AddCategory = ({ categories, onAdd, onDelete }) => {
 
@@ -26,29 +23,39 @@ const AddCategory = ({ categories, onAdd, onDelete }) => {
 
         setText('')
     }
-    categories.map( (cat) => {
-    console.log('AddCategory cat:',cat.id, cat.name)
+    categories.map((cat) => {
+        console.log('AddCategory cat:', cat.id, cat.name)
     }
     )
 
     return (
-        
+
         <div>
+             <Container maxWidth="xs">
             <form className='add-category' onSubmit={onSubmit}>
-                <input id='category-name' variant='outlined' label='Category Name' value={name} onChange={(event) => setText(event.target.value)} />
-                <input type="submit" variant="contained" value='Add'/>
+                <TextField id='category-name' variant='outlined' label='Category Name' value={name} onChange={(event) => setText(event.target.value)} />
+                <Button type="submit" variant="contained">Submit</Button> 
+            </form>
+            <br/>
            
-                    <table>
-                        <tbody>
-                            {categories.map((category) => (
-                                <tr key={category.id }>
-                                    <td >{category.name}</td>
-                                    <td><input id={category.id } type='button' value='delete' onClick={(event) => onDelete(event.target.id)}/></td>
-                                </tr>
-                            ))}
-                    </tbody>
-                    </table>
-                    </form> 
+                <Table size="small" aria-label="simple table">
+                    <TableHead style={{ backgroundColor: '#546E7A' }} >
+                        <TableRow>
+                            <TableCell style={{ color: 'white', }}>Category</TableCell>
+                            <TableCell style={{ color: 'white', }}></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {categories.map((category) => (
+                            <TableRow key={category.id}>
+                                <TableCell>{category.name}</TableCell>
+                                <TableCell><Button id={category.id} type='button' value='delete' onClick={(event) => onDelete(event.target.id)} >Delete</Button></TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </Container>
+
         </div>
 
     )
