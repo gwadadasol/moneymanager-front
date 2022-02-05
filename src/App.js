@@ -8,6 +8,7 @@ import AddCategory from "./components/AddCategory";
 import CategoriesCombobox from "./components/CategoriesCombobox";
 import reportWebVitals from "./reportWebVitals";
 import AdminPanel from "./components/AdminPanel";
+import CategoryChart from "./components/CategoryChart";
 
 const App = () => {
   
@@ -24,6 +25,9 @@ const App = () => {
         console.log(showAdmin); }
         } showAdd={showFormAddTask} />
 
+      
+
+      { !showFormAddTask && <CategoryChart />  }
       { !showFormAddTask && <Transactions /> }
       {showFormAddTask && <AdminPanel />}
 

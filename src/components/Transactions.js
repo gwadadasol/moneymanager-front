@@ -34,9 +34,10 @@ const Transactions = () => {
   const [editIdx, setEditingTransactionRowIndex] = useState(-1);
   const [editingCategoryValue, setEditingCategoryValue] = useState('');
   const [categories, setCategories] = useState([]);
-  const baseUrlTransaction = 'https://localhost:5001';
-  const baseUrlCategory = 'https://localhost:5011' ;
-
+  // const baseUrlTransaction = 'https://localhost:5001';
+  // const baseUrlCategory = 'https://localhost:5011' ;
+  const baseUrlTransaction = 'http://acme.com';
+  const baseUrlCategory = 'http://acme.com';
   useEffect(() => {
 
     const getCategories = async () => {

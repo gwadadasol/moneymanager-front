@@ -8,7 +8,8 @@ import CategoriesCombobox from './CategoriesCombobox'
 const AdminPanel = () => {
     const [categories, setCategories] = useState([]);
     const [categoryRules, setCategoryRules] = useState([]);
-    const baseUrlCategory = 'https://localhost:5011';
+    // const baseUrlCategory = 'https://localhost:5011';
+    const baseUrlCategory = 'http://acme.com';
 
     useEffect(() => {
         const getCategories = async () => { await updateCategories(); }
