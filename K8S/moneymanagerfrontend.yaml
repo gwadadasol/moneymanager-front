@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moneymanagerfrontend-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moneymanagerfrontend
+  template:
+    metadata:
+      labels:
+        app: moneymanagerfrontend
+    spec:
+      containers:
+        - name: moneymanagerfrontend
+          image: gwadadasol/moneymanagerfrontend:latest
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: moneymanagerfrontend-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: moneymanagerfrontend
+  ports:
+    - name: moneymanagerfrontend
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

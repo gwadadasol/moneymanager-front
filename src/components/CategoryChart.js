@@ -24,7 +24,7 @@ const CategoryChart = () => {
 
    //  Categories
    const fetchBalances = async () => {
-    const res = await fetch(baseUrlAnalyzer + '/api/v1/analyzer/balances/monthly')
+    const res = await fetch(baseUrlAnalyzer + '/api/v1/analyzer/amounts/categories')
     const data = await res.json()
 
     return data
@@ -36,7 +36,7 @@ const CategoryChart = () => {
 
     setBalances(newBalances);
     console.log(balances);
-    balances.map((bal) => console.log(bal.year + "-" + bal.month));
+    // balances.map((bal) => console.log(bal.year + "-" + bal.month));
   }
 
   const options = {
@@ -44,7 +44,8 @@ const CategoryChart = () => {
       id: 'apexchart-example'
     },
     xaxis: {
-      categories:     balances.map((bal) =>bal.year + "-" + bal.month)
+      // categories:     balances.map((bal) =>bal.year + "-" + bal.month)
+      categories:     balances.map((bal) =>bal.category)
     }
   };
   const series  = [{

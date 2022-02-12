@@ -1,0 +1,29 @@
+name: Docker Image CI Front End
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+    
+defaults:
+  run:
+    working-directory: ./
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      tagId: ${{github.run_number}} #$(date +%s)
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: |
+        docker build . --file Dockerfile --tag gwadadasol/moneymanagerfrontend:${{env.tagId}}
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker push gwadadasol/moneymanagerfrontend:${{env.tagId}}
+    # - name: Push image to repository
+      # run:  
+        
